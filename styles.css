@@ -43,11 +43,27 @@
 html,body{ margin:0; padding:0; }
 img{ max-width:100%; display:block; }
 
+/* =========================
+   GLOBAL BACKGROUND (FLOATING PAGE)
+   ========================= */
 body{
   font-family: var(--font-body);
-  background: var(--bg-dark);
   color: var(--text-main);
   line-height: 1.65;
+
+  /* ✅ Entire page floats over the same fixed background */
+  background-image: var(--hero-desktop);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 760px){
+  body{
+    background-image: var(--hero-mobile);
+    background-attachment: fixed;
+  }
 }
 
 /* Screen-reader-only utility */
@@ -73,17 +89,19 @@ h1, h2, h3{
 
 h1{
   font-size: clamp(2.1rem, 5vw, 3.3rem);
-  text-shadow: 0 8px 26px rgba(0,0,0,.65);
+  text-shadow: 0 10px 28px rgba(0,0,0,.72);
 }
 
 h2{
   font-size: clamp(1.7rem, 3vw, 2.2rem);
   text-align:center;
+  text-shadow: 0 10px 26px rgba(0,0,0,.70);
 }
 
 h3{
   font-size: 1.25rem;
   margin: 0 0 6px;
+  text-shadow: 0 8px 20px rgba(0,0,0,.60);
 }
 
 /* =========================
@@ -91,18 +109,10 @@ h3{
    ========================= */
 .hero{
   min-height: 92vh;
-  background-image: var(--hero-desktop);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  /* ✅ hero no longer needs its own background slab,
+     because body is the background. Keep it transparent. */
+  background: transparent;
   position: relative;
-}
-
-@media (max-width: 760px){
-  .hero{
-    background-image: var(--hero-mobile);
-    background-attachment: fixed;
-  }
 }
 
 .hero-overlay{
@@ -115,9 +125,10 @@ h3{
   justify-content: center;
   text-align: center;
 
+  /* ✅ Keep hero legible without “panel slabs” elsewhere */
   background:
-    radial-gradient(120% 90% at 50% 20%, rgba(0,0,0,.22), transparent 55%),
-    linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.82));
+    radial-gradient(120% 90% at 50% 20%, rgba(0,0,0,.20), transparent 58%),
+    linear-gradient(rgba(0,0,0,.52), rgba(0,0,0,.78));
 }
 
 .hero-brand{
@@ -137,7 +148,7 @@ h3{
   max-width: 640px;
   margin: 0 0 28px;
   color: var(--text-muted);
-  text-shadow: 0 10px 28px rgba(0,0,0,.6);
+  text-shadow: 0 10px 28px rgba(0,0,0,.65);
 }
 
 .hero-actions{
@@ -158,6 +169,7 @@ h3{
   gap: 10px;
   color: var(--text-muted);
   margin-top: 2px;
+  text-shadow: 0 8px 20px rgba(0,0,0,.65);
 }
 
 .social-link{
@@ -169,6 +181,8 @@ h3{
   border-radius: 12px;
   text-decoration: none;
 
+  /* Leaving this slight treatment for tap-target visibility.
+     If you want 100% clear, set background: transparent; box-shadow: none; */
   background: rgba(0,0,0,.18);
   border: 1px solid rgba(225,182,124,.12);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
@@ -214,9 +228,7 @@ h3{
 }
 
 .btn-copper{
-  /* was: color: var(--copper-text); */
   color: #0b0b0b;              /* ✅ black lettering */
-
   background-image: var(--copper-img);
   background-size: cover;
   background-position: center;
@@ -229,8 +241,7 @@ h3{
     inset 0 -2px 0 rgba(0,0,0,.35),
     0 10px 26px rgba(0,0,0,.65);
 
-  /* was: text-shadow: 0 2px 0 rgba(0,0,0,.35); */
- text-shadow: 0 1px 0 rgba(255,255,255,.18);
+  text-shadow: 0 1px 0 rgba(255,255,255,.18);
 }
 
 .btn-copper:hover{
@@ -253,20 +264,23 @@ h3{
 .btn-outline{
   color: var(--text-main);
   border: 1px solid rgba(225,182,124,.35);
-  background: rgba(0,0,0,.12);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+
+  /* ✅ clear “floating” — no glass fill */
+  background: transparent;
+  box-shadow: none;
+
+  text-shadow: 0 8px 20px rgba(0,0,0,.65);
 }
 
 .btn-outline:hover{
   border-color: rgba(225,182,124,.55);
-  background: rgba(0,0,0,.18);
 }
 
 /* =========================
-   STOREFRONT PANEL
+   STOREFRONT PANEL (FLOATING)
    ========================= */
 .storefront{
-  background: linear-gradient(180deg, #0c0e10, #101417);
+  background: transparent;  /* ✅ remove slab */
   padding: 22px 16px 42px;
 }
 
@@ -287,10 +301,11 @@ h3{
   text-align:center;
   color: var(--text-muted);
   font-size: .95rem;
+  text-shadow: 0 10px 26px rgba(0,0,0,.70);
 }
 
 /* =========================
-   SECTIONS
+   SECTIONS (FLOATING)
    ========================= */
 .section{
   padding: 70px 20px;
@@ -303,10 +318,12 @@ h3{
   color: var(--text-muted);
   margin: 0 auto 38px;
   max-width: 820px;
+  text-shadow: 0 10px 26px rgba(0,0,0,.70);
 }
 
+/* ✅ remove dark slab entirely */
 .section-dark{
-  background: var(--bg-mid);
+  background: transparent;
   max-width: none;
   padding-left: 0;
   padding-right: 0;
@@ -347,13 +364,14 @@ h3{
   margin: 0 auto;
   text-align:center;
   color: var(--text-muted);
+  text-shadow: 0 10px 26px rgba(0,0,0,.70);
 }
 
 /* =========================
-   VISIT
+   VISIT (FLOATING)
    ========================= */
 .visit{
-  background: var(--bg-light);
+  background: transparent; /* ✅ remove slab */
   max-width: none;
 }
 
@@ -361,18 +379,23 @@ h3{
   width: min(520px, calc(100% - 10px));
   margin: 0 auto;
 
-  background: rgba(0,0,0,.28);
-  border: 1px solid rgba(225,182,124,.12);
+  /* ✅ no panel tinting */
+  background: transparent;
+
+  border: 1px solid rgba(225,182,124,.16);
   border-radius: 18px;
   box-shadow: var(--shadow);
 
   padding: 30px 26px;
   text-align: left;
+
+  /* Helps readability without tint */
+  backdrop-filter: none;
 }
 
 .visit-row{
   padding: 18px 0;
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.10);
 }
 
 .visit-row:last-of-type{
@@ -383,12 +406,14 @@ h3{
 .visit-row p{
   margin: 0;
   color: var(--text-muted);
+  text-shadow: 0 10px 22px rgba(0,0,0,.70);
 }
 
 .visit-row a{
   color: var(--text-main);
   text-decoration: none;
   border-bottom: 1px solid rgba(225,182,124,.22);
+  text-shadow: 0 10px 22px rgba(0,0,0,.70);
 }
 
 .visit-row a:hover{
@@ -414,13 +439,17 @@ h3{
 }
 
 /* =========================
-   FOOTER
+   FOOTER (FLOATING)
    ========================= */
 .footer{
   text-align:center;
   padding: 44px 20px;
   color: var(--text-muted);
-  background: #0b0d0f;
+
+  /* ✅ remove footer slab */
+  background: transparent;
+
+  text-shadow: 0 10px 26px rgba(0,0,0,.75);
 }
 
 .footer-note{
