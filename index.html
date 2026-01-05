@@ -6,15 +6,25 @@
   <title>Helen Hat Company</title>
   <meta name="description" content="Classic hats and accessories in the heart of Helen, Georgia. From everyday wear to alpine favorites." />
 
-  <!-- Fonts (display for headers/buttons, clean sans for body) -->
+  <!-- Body font only (Cormorant). Circusia is self-hosted via @font-face in CSS. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+
+  <!-- Hidden SVG defs so icons can use patina image fill -->
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute; width:0; height:0; overflow:hidden">
+    <defs>
+      <!-- patternUnits=userSpaceOnUse makes the image behave predictably across different icon sizes -->
+      <pattern id="patinaFill" patternUnits="userSpaceOnUse" width="64" height="64">
+        <image href="patina.jpg" x="0" y="0" width="64" height="64" preserveAspectRatio="xMidYMid slice"></image>
+      </pattern>
+    </defs>
+  </svg>
 
   <!-- ======================
        HERO (desktop/mobile BG swap in CSS)
@@ -33,11 +43,24 @@
         <a href="#visit" class="btn btn-outline">Get Directions</a>
       </div>
 
+      <!-- Social icons (patina fill) -->
       <div class="hero-social" aria-label="Social links">
-        <!-- Replace # with real links when you have them -->
-        <a href="#" rel="noopener" aria-label="Instagram">Instagram</a>
+        <!-- Replace href values with real links when ready -->
+        <a class="social-link" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg class="social-ico" viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path fill="url(#patinaFill)" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9zm10.25 1.75a1 1 0 1 1 0 2a1 1 0 0 1 0-2zM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6a3 3 0 0 0 0-6z"/>
+          </svg>
+          <span class="sr-only">Instagram</span>
+        </a>
+
         <span class="dot" aria-hidden="true">•</span>
-        <a href="#" rel="noopener" aria-label="Facebook">Facebook</a>
+
+        <a class="social-link" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg class="social-ico" viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path fill="url(#patinaFill)" d="M13.5 22v-8h2.7l.4-3H13.5V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.4-.1-2.6-.1c-2.6 0-4.4 1.6-4.4 4.5V11H7v3h2.8v8h3.7z"/>
+          </svg>
+          <span class="sr-only">Facebook</span>
+        </a>
       </div>
     </div>
   </header>
