@@ -1,5 +1,5 @@
 /* =========================
-   ROOT VARIABLES (LOCKED)
+   SELF-HOSTED DISPLAY FONT
    ========================= */
 @font-face{
   font-family: "Circusia";
@@ -9,8 +9,10 @@
   font-display: swap;
 }
 
+/* =========================
+   ROOT VARIABLES (LOCKED)
+   ========================= */
 :root{
-  /* Layout + base tones */
   --bg-dark: #0c0e10;
   --bg-mid:  #14181c;
   --bg-light:#1b2025;
@@ -21,15 +23,12 @@
   --radius: 16px;
   --shadow: 0 18px 40px rgba(0,0,0,.50);
 
-  /* Fonts */
   --font-display: "Circusia", Georgia, "Times New Roman", serif;
   --font-body: "Cormorant Garamond", Georgia, "Times New Roman", serif;
 
-  /* Hero backgrounds */
   --hero-desktop: url("wpage-bg.jpg");
   --hero-mobile:  url("mobile-bg.jpg");
 
-  /* Patina (full glory) */
   --copper-img: url("/patina.jpg");
   --copper-dark: #4c2516;
   --copper-mid:  #9a5a34;
@@ -49,7 +48,18 @@ body{
   background: var(--bg-dark);
   color: var(--text-main);
   line-height: 1.65;
-} 
+}
+
+/* Screen-reader-only utility */
+.sr-only{
+  position:absolute;
+  width:1px; height:1px;
+  padding:0; margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
 
 /* =========================
    TYPOGRAPHY
@@ -58,6 +68,7 @@ h1, h2, h3{
   font-family: var(--font-display);
   font-weight: normal;
   letter-spacing: .04em;
+  margin: 0 0 12px;
 }
 
 h1{
@@ -104,7 +115,6 @@ h3{
   justify-content: center;
   text-align: center;
 
-  /* Legibility overlay (keeps tone, not neon) */
   background:
     radial-gradient(120% 90% at 50% 20%, rgba(0,0,0,.22), transparent 55%),
     linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.82));
@@ -138,99 +148,107 @@ h3{
   margin-bottom: 18px;
 }
 
+/* =========================
+   SOCIAL ICONS (PATINA)
+   ========================= */
 .hero-social{
-  font-size: .95rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
   color: var(--text-muted);
+  margin-top: 2px;
 }
 
-.hero-social a{
-  color: var(--text-muted);
+.social-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   text-decoration: none;
-  border-bottom: 1px solid rgba(225,182,124,.22);
+
+  /* subtle metal housing so the patina reads */
+  background: rgba(0,0,0,.18);
+  border: 1px solid rgba(225,182,124,.12);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
 }
 
-.hero-social a:hover{
-  color: var(--text-main);
-  border-bottom-color: rgba(225,182,124,.45);
+.social-ico{
+  width: 20px;
+  height: 20px;
+  display:block;
 }
 
-.dot{ opacity:.55; margin: 0 10px; }
+.social-link:hover{
+  transform: translateY(-1px);
+  border-color: rgba(225,182,124,.26);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.05),
+    0 10px 26px rgba(0,0,0,.55);
+}
+
+.dot{
+  opacity:.55;
+  margin: 0 4px;
+}
 
 /* =========================
-   BUTTONS (DISPLAY FONT + FULL PATINA)
+   BUTTONS (FIXED + SATURATED PATINA)
    ========================= */
 .btn{
   font-family: var(--font-display);
   font-weight: normal;
   letter-spacing: .12em;
   text-transform: uppercase;
-}
 
   padding: 14px 28px;
   border-radius: 12px;
   text-decoration: none;
+
   display:inline-flex;
   align-items:center;
   justify-content:center;
   user-select:none;
+  position: relative;
 }
 
 .btn-copper{
-  position: relative;
   color: var(--copper-text);
 
-  /* Full glory patina as primary fill */
+  /* FULL SATURATION: no washout layers, patina is the fill */
   background-image: var(--copper-img);
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 
-  border: 1px solid rgba(76,37,22,.9);
+  border: 1px solid rgba(76,37,22,.92);
+
+  /* Physical depth only (no fog overlay) */
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -2px 0 rgba(0,0,0,.35),
     0 10px 26px rgba(0,0,0,.65);
 
   text-shadow: 0 2px 0 rgba(0,0,0,.35);
 }
 
-.btn-copper::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: 12px;
-
-  /* subtle “metal plate” shading + edge warmth */
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.18)),
-    radial-gradient(120% 140% at 50% 0%, rgba(225,182,124,.10), transparent 55%);
-  pointer-events:none;
-}
-
-.btn-copper::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: 12px;
-
-  /* quiet highlight on top edge, like worn metal */
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.20),
-    inset 0 -1px 0 rgba(0,0,0,.35);
-  pointer-events:none;
-}
-
 .btn-copper:hover{
   transform: translateY(-1px);
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -2px 0 rgba(0,0,0,.38),
     0 14px 34px rgba(0,0,0,.72);
 }
 
 .btn-copper:active{
   transform: translateY(0px);
+  filter: saturate(1.08) contrast(1.02);
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.08),
-    0 8px 20px rgba(0,0,0,.65);
-  filter: brightness(.96);
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(0,0,0,.45),
+    0 8px 20px rgba(0,0,0,.62);
 }
 
 .btn-outline{
