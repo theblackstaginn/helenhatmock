@@ -1,6 +1,14 @@
 /* =========================
    ROOT VARIABLES (LOCKED)
    ========================= */
+@font-face{
+  font-family: "Circusia";
+  src: url("/circusia.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root{
   /* Layout + base tones */
   --bg-dark: #0c0e10;
