@@ -43,27 +43,60 @@
 html,body{ margin:0; padding:0; }
 img{ max-width:100%; display:block; }
 
+html{
+  background: #000; /* fallback behind fixed bg */
+}
+
 /* =========================
-   GLOBAL BACKGROUND (FLOATING PAGE)
+   GLOBAL BACKGROUND (REAL FIXED LAYER)
+   - Works on iOS Safari (unlike background-attachment: fixed)
    ========================= */
 body{
   font-family: var(--font-body);
   color: var(--text-main);
   line-height: 1.65;
 
-  /* ✅ Entire page floats over the same fixed background */
+  /* ✅ IMPORTANT: do NOT set the image on body background.
+     We use ::before for a true fixed layer. */
+  background: transparent;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Fixed background layer */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
   background-image: var(--hero-desktop);
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
+
+  /* Helps iOS keep this stable */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
+/* Mobile background swap (and slightly higher anchor to reduce “face zoom”) */
 @media (max-width: 760px){
-  body{
+  body::before{
     background-image: var(--hero-mobile);
-    background-attachment: fixed;
+    background-position: center top;
   }
+}
+
+/* Optional very subtle global darkening for legibility WITHOUT “panels”
+   (If you want it even cleaner, set opacity to 0 or delete this.) */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0,0,0,.18);
+  pointer-events: none;
 }
 
 /* Screen-reader-only utility */
@@ -109,8 +142,6 @@ h3{
    ========================= */
 .hero{
   min-height: 92vh;
-  /* ✅ hero no longer needs its own background slab,
-     because body is the background. Keep it transparent. */
   background: transparent;
   position: relative;
 }
@@ -125,10 +156,10 @@ h3{
   justify-content: center;
   text-align: center;
 
-  /* ✅ Keep hero legible without “panel slabs” elsewhere */
+  /* Keep hero readable; this is not a “scroll slab” */
   background:
     radial-gradient(120% 90% at 50% 20%, rgba(0,0,0,.20), transparent 58%),
-    linear-gradient(rgba(0,0,0,.52), rgba(0,0,0,.78));
+    linear-gradient(rgba(0,0,0,.50), rgba(0,0,0,.78));
 }
 
 .hero-brand{
@@ -181,8 +212,7 @@ h3{
   border-radius: 12px;
   text-decoration: none;
 
-  /* Leaving this slight treatment for tap-target visibility.
-     If you want 100% clear, set background: transparent; box-shadow: none; */
+  /* If you want these 100% clear too, set background: transparent; box-shadow:none; */
   background: rgba(0,0,0,.18);
   border: 1px solid rgba(225,182,124,.12);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
@@ -208,7 +238,7 @@ h3{
 }
 
 /* =========================
-   BUTTONS (FIXED + SATURATED)
+   BUTTONS (SATURATED + READABLE)
    ========================= */
 .btn{
   font-family: var(--font-display);
@@ -225,10 +255,14 @@ h3{
   justify-content:center;
   user-select:none;
   position: relative;
+
+  /* tiny lift for readability vs background detail */
+  text-shadow: 0 10px 20px rgba(0,0,0,.55);
 }
 
 .btn-copper{
-  color: #0b0b0b;              /* ✅ black lettering */
+  color: #0b0b0b; /* black lettering */
+
   background-image: var(--copper-img);
   background-size: cover;
   background-position: center;
@@ -241,7 +275,10 @@ h3{
     inset 0 -2px 0 rgba(0,0,0,.35),
     0 10px 26px rgba(0,0,0,.65);
 
-  text-shadow: 0 1px 0 rgba(255,255,255,.18);
+  /* ✅ readability: thin light edge + soft dark bloom (no tint panel) */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.30),
+    0 0 6px rgba(0,0,0,.35);
 }
 
 .btn-copper:hover{
@@ -264,12 +301,10 @@ h3{
 .btn-outline{
   color: var(--text-main);
   border: 1px solid rgba(225,182,124,.35);
-
-  /* ✅ clear “floating” — no glass fill */
   background: transparent;
   box-shadow: none;
 
-  text-shadow: 0 8px 20px rgba(0,0,0,.65);
+  text-shadow: 0 10px 22px rgba(0,0,0,.70);
 }
 
 .btn-outline:hover{
@@ -280,7 +315,7 @@ h3{
    STOREFRONT PANEL (FLOATING)
    ========================= */
 .storefront{
-  background: transparent;  /* ✅ remove slab */
+  background: transparent;
   padding: 22px 16px 42px;
 }
 
@@ -321,7 +356,6 @@ h3{
   text-shadow: 0 10px 26px rgba(0,0,0,.70);
 }
 
-/* ✅ remove dark slab entirely */
 .section-dark{
   background: transparent;
   max-width: none;
@@ -371,7 +405,7 @@ h3{
    VISIT (FLOATING)
    ========================= */
 .visit{
-  background: transparent; /* ✅ remove slab */
+  background: transparent;
   max-width: none;
 }
 
@@ -379,18 +413,13 @@ h3{
   width: min(520px, calc(100% - 10px));
   margin: 0 auto;
 
-  /* ✅ no panel tinting */
   background: transparent;
-
   border: 1px solid rgba(225,182,124,.16);
   border-radius: 18px;
   box-shadow: var(--shadow);
 
   padding: 30px 26px;
   text-align: left;
-
-  /* Helps readability without tint */
-  backdrop-filter: none;
 }
 
 .visit-row{
@@ -445,10 +474,7 @@ h3{
   text-align:center;
   padding: 44px 20px;
   color: var(--text-muted);
-
-  /* ✅ remove footer slab */
   background: transparent;
-
   text-shadow: 0 10px 26px rgba(0,0,0,.75);
 }
 
