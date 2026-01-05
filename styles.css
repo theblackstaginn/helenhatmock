@@ -208,46 +208,79 @@ h3{
 /* =========================
    SOCIAL ICONS
    ========================= */
+/* =========================
+   SOCIAL ICONS — BRONZE (MATCH BUTTONS)
+   ========================= */
 .hero-social{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap: 10px;
-  color: var(--text-muted);
-  margin-top: 2px;
-  text-shadow: 0 8px 20px rgba(0,0,0,.65);
+  gap: 12px;
+  margin-top: 6px;
 }
 
+/* Bronze plate */
 .social-link{
   display:inline-flex;
   align-items:center;
   justify-content:center;
+
   width: 46px;
   height: 46px;
-  border-radius: 12px;
-  text-decoration: none;
+  border-radius: 14px;
 
-  background: rgba(0,0,0,.18);
-  border: 1px solid rgba(225,182,124,.12);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+  background-image: var(--copper-img);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 1px solid rgba(76,37,22,.9);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -2px 0 rgba(0,0,0,.35),
+    0 10px 26px rgba(0,0,0,.55);
+
+  text-decoration:none;
+  position: relative;
 }
 
+/* Calm patina slightly for legibility */
+.social-link::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  background: rgba(18,14,10,.12);
+  pointer-events:none;
+}
+
+/* Icon itself */
 .social-ico{
   width: 26px;
   height: 26px;
-  display:block;
+
+  /* warm off-white, same logic as buttons */
+  filter: brightness(0) invert(0.92);
 }
 
+/* Hover / press */
 .social-link:hover{
   transform: translateY(-1px);
-  border-color: rgba(225,182,124,.26);
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.05),
-    0 10px 26px rgba(0,0,0,.55);
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -2px 0 rgba(0,0,0,.38),
+    0 14px 34px rgba(0,0,0,.65);
 }
 
-.dot{ opacity:.55; margin: 0 4px; }
-
+.social-link:active{
+  transform: translateY(0);
+  filter: saturate(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(0,0,0,.45),
+    0 8px 20px rgba(0,0,0,.55);
+}
 /* =========================
    BUTTONS (REAL BRONZE)
    ========================= */
