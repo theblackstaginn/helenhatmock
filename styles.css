@@ -145,6 +145,28 @@ h3{
   position: relative;
 }
 
+/* =========================
+   HERO LANDING POSITION (LESS TOP GAP)
+   ========================= */
+
+/* Stop vertical centering so content sits higher naturally */
+.hero-overlay{
+  justify-content: flex-start;
+  padding-top: clamp(14px, 3vh, 28px);
+}
+
+/* Remove extra “air” above the logo */
+.hero-brand{
+  margin-top: 0;
+  margin-bottom: 12px; /* tighter than before */
+}
+
+/* Optional: tighten copy spacing slightly so the fold stays compact */
+.hero p{
+  margin: 0 0 22px;
+}
+
+
 .hero-overlay{
   min-height: 92vh;
   padding: 44px 20px;
