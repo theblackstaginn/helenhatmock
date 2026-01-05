@@ -280,7 +280,25 @@ h3{
     0 1px 0 rgba(255,255,255,.30),
     0 0 6px rgba(0,0,0,.35);
 }
+/* =========================
+   BUTTON PATINA — READABILITY TUNE
+   ========================= */
+.btn-copper{
+  /* Calm the patina just a touch */
+  filter: saturate(0.82) contrast(0.95);
+}
 
+/* Subtle neutral veil to even hot spots (does NOT tint like glass) */
+.btn-copper::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+
+  /* very light parchment/soot balance */
+  background: rgba(18, 14, 10, 0.12);
+}
 .btn-copper:hover{
   transform: translateY(-1px);
   box-shadow:
