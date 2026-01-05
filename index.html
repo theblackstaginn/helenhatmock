@@ -4,8 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Helen Hat Company</title>
-
   <meta name="description" content="Classic hats and accessories in the heart of Helen, Georgia. From everyday wear to alpine favorites." />
+
+  <!-- Fonts (display for headers/buttons, clean sans for body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -13,24 +17,40 @@
 <body>
 
   <!-- ======================
-       HERO
+       HERO (desktop/mobile BG swap in CSS)
        ====================== -->
-  <header class="hero" style="background-image:url('inside-hatco.jpg')">
+  <header class="hero" role="banner">
     <div class="hero-overlay">
+      <div class="hero-brand" aria-label="Helen Hat Company">
+        <img class="logo" src="hatco-logo.PNG" alt="Helen Hat Company logo" />
+      </div>
+
       <h1>Classic hats for every style</h1>
       <p>From everyday favorites to statement pieces — right here in Helen.</p>
 
       <div class="hero-actions">
-        <a href="#gallery" class="btn-copper">Browse the Gallery</a>
-        <a href="#visit" class="btn-outline">Get Directions</a>
+        <a href="#gallery" class="btn btn-copper">Browse the Gallery</a>
+        <a href="#visit" class="btn btn-outline">Get Directions</a>
       </div>
 
-      <div class="hero-social">
-        <a href="#" aria-label="Instagram">Instagram</a>
-        <a href="#" aria-label="Facebook">Facebook</a>
+      <div class="hero-social" aria-label="Social links">
+        <!-- Replace # with real links when you have them -->
+        <a href="#" rel="noopener" aria-label="Instagram">Instagram</a>
+        <span class="dot" aria-hidden="true">•</span>
+        <a href="#" rel="noopener" aria-label="Facebook">Facebook</a>
       </div>
     </div>
   </header>
+
+  <!-- ======================
+       STOREFRONT PANEL (locked)
+       ====================== -->
+  <section class="storefront" aria-label="Storefront photo">
+    <div class="storefront-wrap">
+      <img src="st-front.jpg" alt="Helen Hat Company storefront" />
+      <p class="storefront-caption">Located in the heart of Helen, Georgia</p>
+    </div>
+  </section>
 
   <!-- ======================
        GALLERY
@@ -42,14 +62,14 @@
     </p>
 
     <div class="gallery-grid">
-      <img src="hat-1.jpg" alt="Hat selection">
-      <img src="hat-2.jpg" alt="Hat selection">
-      <img src="hat-3.jpg" alt="Hat selection">
-      <img src="hat-4.jpg" alt="Hat selection">
-      <img src="hat-5.jpg" alt="Hat selection">
-      <img src="front-desk.jpg" alt="Store interior">
-      <img src="inside-hatco.jpg" alt="Hat wall">
-      <img src="st-front.jpg" alt="Storefront">
+      <img src="inside-hatco.jpg" alt="Hat wall inside the shop">
+      <img src="front-desk.jpg" alt="Front desk and interior view">
+      <img src="hat-1.jpg" alt="Hat selection closeup">
+      <img src="hat-2.jpg" alt="Hat selection closeup">
+      <img src="hat-3.jpg" alt="Hat selection closeup">
+      <img src="hat-4.jpg" alt="Hat selection closeup">
+      <img src="hat-5.jpg" alt="Hat selection closeup">
+      <img src="hatco-truck.jpg" alt="Helen Hat Company vehicle">
     </div>
   </section>
 
@@ -72,24 +92,37 @@
     <h2>Visit Us</h2>
 
     <div class="visit-card">
-      <p><strong>Address</strong><br>
-        8614 N Main Street<br>
-        Helen, GA 30545
-      </p>
+      <div class="visit-row">
+        <h3>Location</h3>
+        <p>
+          8614 N Main Street<br>
+          Helen, GA 30545
+        </p>
+        <a class="mini-link" href="https://maps.google.com/?q=8614+N+Main+Street+Helen+GA+30545" target="_blank" rel="noopener">
+          Open in Maps
+        </a>
+      </div>
 
-      <p><strong>Hours</strong><br>
-        Mon–Thu: 10am–9pm<br>
-        Fri–Sat: 10am–10pm<br>
-        Sun: 10am–9pm
-      </p>
+      <div class="visit-row">
+        <h3>Hours</h3>
+        <p>
+          Mon–Thu: 10am–9pm<br>
+          Fri–Sat: 10am–10pm<br>
+          Sun: 10am–9pm
+        </p>
+        <p class="fineprint">Hours may vary seasonally.</p>
+      </div>
 
-      <p><strong>Phone</strong><br>
-        <a href="tel:17068922909">(706) 892-2909</a>
-      </p>
+      <div class="visit-row">
+        <h3>Contact</h3>
+        <p><a href="tel:17068922909">(706) 892-2909</a></p>
+      </div>
 
-      <a class="btn-copper" href="https://maps.google.com/?q=8614+N+Main+Street+Helen+GA+30545" target="_blank">
-        Get Directions
-      </a>
+      <div class="visit-actions">
+        <a class="btn btn-copper" href="https://maps.google.com/?q=8614+N+Main+Street+Helen+GA+30545" target="_blank" rel="noopener">
+          Get Directions
+        </a>
+      </div>
     </div>
   </section>
 
@@ -98,7 +131,7 @@
        ====================== -->
   <footer class="footer">
     <p>Proudly serving Helen, Georgia</p>
-    <p class="footer-note">This is a concept mockup.</p>
+    <p class="footer-note">Concept mockup for demonstration.</p>
   </footer>
 
 </body>
