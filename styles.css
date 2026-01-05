@@ -1,38 +1,49 @@
+/* =========================================================
+   Helen Hat Company — styles.css (CLEAN)
+   - Circusia self-hosted display font
+   - Cormorant Garamond body font
+   - True fixed background layer (iOS safe)
+   - Hero is CLEAR (no tint panel)
+   - Hero content sits higher (less top gap)
+   - Floating sections (no panel tinting)
+   - Realistic bronze buttons
+   ========================================================= */
+
 /* =========================
    SELF-HOSTED DISPLAY FONT
    ========================= */
 @font-face{
   font-family: "Circusia";
-  src: url("./circusia.ttf") format("truetype"); /* ✅ project-site safe */
+  src: url("./circusia.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 /* =========================
-   ROOT VARIABLES (LOCKED)
+   ROOT VARIABLES
    ========================= */
 :root{
+  /* Base tones */
   --bg-dark: #0c0e10;
-  --bg-mid:  #14181c;
-  --bg-light:#1b2025;
-
   --text-main: #e7e2db;
   --text-muted: rgba(231,226,219,.76);
 
   --radius: 16px;
   --shadow: 0 18px 40px rgba(0,0,0,.50);
 
+  /* Fonts */
   --font-display: "Circusia", Georgia, "Times New Roman", serif;
   --font-body: "Cormorant Garamond", Georgia, "Times New Roman", serif;
 
+  /* Background images */
   --hero-desktop: url("wpage-bg.jpg");
   --hero-mobile:  url("mobile-bg.jpg");
 
-  /* Texture kept for optional accents elsewhere */
-  --copper-img: url("./patina.jpg"); /* ✅ project-site safe */
+  /* Optional texture for accents elsewhere */
+  --patina-img: url("./patina.jpg");
 
-  /* ✅ REAL BRONZE BUTTON MATERIAL */
+  /* Real bronze button material */
   --bronze-dark:  #5a3a22;
   --bronze-mid:   #9a6a3a;
   --bronze-light: #d4b07a;
@@ -45,26 +56,27 @@
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
 img{ max-width:100%; display:block; }
+
 html{ background:#000; } /* fallback behind fixed bg */
 
 /* =========================
-   GLOBAL BACKGROUND (REAL FIXED LAYER)
-   - Works on iOS Safari
+   GLOBAL FIXED BACKGROUND (iOS SAFE)
    ========================= */
 body{
   font-family: var(--font-body);
   color: var(--text-main);
 
-  /* ✅ readability upgrade */
-  font-size: 18.5px;      /* was browser default (~16px) */
-  line-height: 1.75;      /* smoother for Garamond */
+  /* ✅ readability bump for Cormorant Garamond */
+  font-size: 18.5px;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
 
   background: transparent;
   position: relative;
   min-height: 100vh;
 }
 
-/* Fixed background layer */
+/* Fixed background image layer */
 body::before{
   content:"";
   position: fixed;
@@ -95,10 +107,10 @@ body::after{
   inset: 0;
   z-index: -1;
   background: rgba(0,0,0,.18);
-  pointer-events: none;
+  pointer-events:none;
 }
 
-/* Screen-reader-only utility */
+/* Screen-reader-only */
 .sr-only{
   position:absolute;
   width:1px; height:1px;
@@ -110,7 +122,7 @@ body::after{
 }
 
 /* =========================
-   TYPOGRAPHY
+   TYPOGRAPHY (DISPLAY)
    ========================= */
 h1, h2, h3{
   font-family: var(--font-display);
@@ -138,6 +150,8 @@ h3{
 
 /* =========================
    HERO
+   - CLEAR overlay (no tint)
+   - Content sits higher (less top gap)
    ========================= */
 .hero{
   min-height: 92vh;
@@ -145,39 +159,19 @@ h3{
   position: relative;
 }
 
-/* =========================
-   HERO LANDING POSITION (LESS TOP GAP)
-   ========================= */
-
-/* Stop vertical centering so content sits higher naturally */
-.hero-overlay{
-  justify-content: flex-start;
-  padding-top: clamp(14px, 3vh, 28px);
-}
-
-/* Remove extra “air” above the logo */
-.hero-brand{
-  margin-top: 0;
-  margin-bottom: 12px; /* tighter than before */
-}
-
-/* Optional: tighten copy spacing slightly so the fold stays compact */
-.hero p{
-  margin: 0 0 22px;
-}
-
-
 .hero-overlay{
   min-height: 92vh;
-  padding: 44px 20px;
 
-  display: flex;
+  /* ✅ LAND HIGHER: less top padding, no vertical centering */
+  padding: 18px 20px 44px;
+
+  display:flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  align-items:center;
+  justify-content:flex-start;
+  text-align:center;
 
-  /* ✅ NO tint — hero is clean */
+  /* ✅ NO tint */
   background: transparent;
 }
 
@@ -185,7 +179,9 @@ h3{
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom: 18px;
+
+  /* tighten top gap */
+  margin: 0 0 12px;
 }
 
 .logo{
@@ -196,7 +192,7 @@ h3{
 
 .hero p{
   max-width: 640px;
-  margin: 0 0 28px;
+  margin: 0 0 22px;
   color: var(--text-muted);
   text-shadow: 0 10px 28px rgba(0,0,0,.65);
 }
@@ -206,11 +202,11 @@ h3{
   gap:14px;
   flex-wrap:wrap;
   justify-content:center;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 /* =========================
-   SOCIAL ICONS (PATINA FILL)
+   SOCIAL ICONS
    ========================= */
 .hero-social{
   display:flex;
@@ -250,10 +246,7 @@ h3{
     0 10px 26px rgba(0,0,0,.55);
 }
 
-.dot{
-  opacity:.55;
-  margin: 0 4px;
-}
+.dot{ opacity:.55; margin: 0 4px; }
 
 /* =========================
    BUTTONS (REAL BRONZE)
@@ -300,9 +293,9 @@ h3{
   border: 1px solid #4a2f1b;
 
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.35),   /* polished edge */
-    inset 0 -2px 0 rgba(0,0,0,.45),        /* thickness */
-    0 10px 26px rgba(0,0,0,.65);           /* lift */
+    inset 0 1px 0 rgba(255,255,255,.35),
+    inset 0 -2px 0 rgba(0,0,0,.45),
+    0 10px 26px rgba(0,0,0,.65);
 
   text-shadow:
     0 1px 0 rgba(0,0,0,.65),
@@ -311,7 +304,7 @@ h3{
   filter: saturate(1.05);
 }
 
-/* restrained oxidation in the recesses (optional, subtle) */
+/* restrained oxidation (subtle, reads like age) */
 .btn-copper::before{
   content:"";
   position:absolute;
@@ -345,6 +338,7 @@ h3{
     0 6px 16px rgba(0,0,0,.55);
 }
 
+/* Secondary outline button */
 .btn-outline{
   color: var(--text-main);
   border: 1px solid rgba(225,182,124,.35);
@@ -358,7 +352,7 @@ h3{
 }
 
 /* =========================
-   STOREFRONT PANEL (FLOATING)
+   STOREFRONT (FLOATING)
    ========================= */
 .storefront{
   background: transparent;
@@ -366,7 +360,7 @@ h3{
 }
 
 .storefront-wrap{
-  width: min(1120px, calc(100% - 0px));
+  width: min(1120px, 100%);
   margin: 0 auto;
 }
 
@@ -381,7 +375,7 @@ h3{
   margin: 14px 0 0;
   text-align:center;
   color: var(--text-muted);
-  font-size: .95rem;
+  font-size: 1rem;
   text-shadow: 0 10px 26px rgba(0,0,0,.70);
 }
 
@@ -498,12 +492,12 @@ h3{
 .mini-link{
   display:inline-block;
   margin-top: 8px;
-  font-size: .95rem;
+  font-size: 1rem;
 }
 
 .fineprint{
   margin-top: 10px !important;
-  font-size: .9rem;
+  font-size: .95rem;
   opacity: .85;
 }
 
@@ -525,7 +519,7 @@ h3{
 }
 
 .footer-note{
-  font-size: .86rem;
+  font-size: .9rem;
   opacity: .65;
   margin-top: 8px;
 }
