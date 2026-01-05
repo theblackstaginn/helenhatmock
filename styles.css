@@ -29,13 +29,14 @@
   --hero-desktop: url("wpage-bg.jpg");
   --hero-mobile:  url("mobile-bg.jpg");
 
+  /* Texture kept for optional accents elsewhere */
   --copper-img: url("./patina.jpg"); /* ✅ project-site safe */
-  --copper-dark: #4c2516;
-  --copper-mid:  #9a5a34;
-  --copper-light:#e1b67c;
 
-  /* ✅ Brand bronze (button text matches logo tone) */
-  --brand-bronze: #cfa66a;
+  /* ✅ REAL BRONZE BUTTON MATERIAL */
+  --bronze-dark:  #5a3a22;
+  --bronze-mid:   #9a6a3a;
+  --bronze-light: #d4b07a;
+  --bronze-text:  #f6eddc;
 }
 
 /* =========================
@@ -44,7 +45,6 @@
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
 img{ max-width:100%; display:block; }
-
 html{ background:#000; } /* fallback behind fixed bg */
 
 /* =========================
@@ -231,7 +231,7 @@ h3{
 }
 
 /* =========================
-   BUTTONS (PATINA + BRAND BRONZE TEXT)
+   BUTTONS (REAL BRONZE)
    ========================= */
 .btn{
   font-family: var(--font-display);
@@ -252,56 +252,72 @@ h3{
   text-shadow: 0 10px 20px rgba(0,0,0,.55);
 }
 
+/* Primary bronze button */
 .btn-copper{
-  /* ✅ Brand bronze lettering */
-  color: var(--brand-bronze);
+  color: var(--bronze-text);
 
-  background-image: var(--copper-img);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background:
+    /* subtle grain */
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.02),
+      rgba(0,0,0,.02),
+      rgba(255,255,255,.02)
+    ),
+    /* bronze body */
+    linear-gradient(
+      180deg,
+      var(--bronze-light) 0%,
+      var(--bronze-mid) 45%,
+      var(--bronze-dark) 100%
+    );
 
-  border: 1px solid rgba(76,37,22,.92);
-
-  /* ✅ Calm patina slightly for readability */
-  filter: saturate(0.65) contrast(0.94);
+  border: 1px solid #4a2f1b;
 
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.10),
-    inset 0 -2px 0 rgba(0,0,0,.35),
-    0 10px 26px rgba(0,0,0,.65);
+    inset 0 1px 0 rgba(255,255,255,.35),   /* polished edge */
+    inset 0 -2px 0 rgba(0,0,0,.45),        /* thickness */
+    0 10px 26px rgba(0,0,0,.65);           /* lift */
 
-  /* Engraved readability */
   text-shadow:
-    0 1px 0 rgba(0,0,0,.55),
+    0 1px 0 rgba(0,0,0,.65),
     0 0 6px rgba(0,0,0,.35);
+
+  filter: saturate(1.05);
 }
 
-/* Subtle neutral veil to even hot spots (NOT a panel) */
+/* restrained oxidation in the recesses (optional, subtle) */
 .btn-copper::before{
   content:"";
   position:absolute;
   inset:0;
   border-radius: inherit;
   pointer-events:none;
-  background: rgba(18,14,10,.10);
+
+  background:
+    radial-gradient(
+      120% 140% at 50% 100%,
+      rgba(60,120,110,.12),
+      transparent 55%
+    );
 }
 
 .btn-copper:hover{
   transform: translateY(-1px);
+  filter: saturate(1.1) brightness(1.03);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.14),
-    inset 0 -2px 0 rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -2px 0 rgba(0,0,0,.48),
     0 14px 34px rgba(0,0,0,.72);
 }
 
 .btn-copper:active{
-  transform: translateY(0px);
-  filter: saturate(0.76) contrast(0.98);
+  transform: translateY(0);
+  filter: brightness(0.97);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.10),
-    inset 0 -1px 0 rgba(0,0,0,.45),
-    0 8px 20px rgba(0,0,0,.62);
+    inset 0 1px 0 rgba(255,255,255,.25),
+    inset 0 -1px 0 rgba(0,0,0,.55),
+    0 6px 16px rgba(0,0,0,.55);
 }
 
 .btn-outline{
