@@ -3,7 +3,7 @@
    ========================= */
 @font-face{
   font-family: "Circusia";
-  src: url("/circusia.ttf") format("truetype");
+  src: url("./circusia.ttf") format("truetype"); /* ✅ project-site safe */
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -29,7 +29,7 @@
   --hero-desktop: url("wpage-bg.jpg");
   --hero-mobile:  url("mobile-bg.jpg");
 
-  --copper-img: url("/patina.jpg");
+  --copper-img: url("./patina.jpg"); /* ✅ project-site safe */
   --copper-dark: #4c2516;
   --copper-mid:  #9a5a34;
   --copper-light:#e1b67c;
@@ -149,7 +149,7 @@ h3{
 }
 
 /* =========================
-   SOCIAL ICONS (PATINA)
+   SOCIAL ICONS (PATINA FILL)
    ========================= */
 .hero-social{
   display:flex;
@@ -169,7 +169,6 @@ h3{
   border-radius: 12px;
   text-decoration: none;
 
-  /* subtle metal housing so the patina reads */
   background: rgba(0,0,0,.18);
   border: 1px solid rgba(225,182,124,.12);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
@@ -195,7 +194,7 @@ h3{
 }
 
 /* =========================
-   BUTTONS (FIXED + SATURATED PATINA)
+   BUTTONS (FIXED + SATURATED)
    ========================= */
 .btn{
   font-family: var(--font-display);
@@ -217,7 +216,7 @@ h3{
 .btn-copper{
   color: var(--copper-text);
 
-  /* FULL SATURATION: no washout layers, patina is the fill */
+  /* FULL SATURATION patina fill */
   background-image: var(--copper-img);
   background-size: cover;
   background-position: center;
@@ -225,7 +224,6 @@ h3{
 
   border: 1px solid rgba(76,37,22,.92);
 
-  /* Physical depth only (no fog overlay) */
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.12),
     inset 0 -2px 0 rgba(0,0,0,.35),
@@ -264,7 +262,7 @@ h3{
 }
 
 /* =========================
-   STOREFRONT PANEL (LOCKED)
+   STOREFRONT PANEL
    ========================= */
 .storefront{
   background: linear-gradient(180deg, #0c0e10, #101417);
@@ -357,8 +355,6 @@ h3{
   background: var(--bg-light);
   max-width: none;
 }
-
-.visit > h2{ padding-top: 0; }
 
 .visit-card{
   width: min(520px, calc(100% - 10px));
