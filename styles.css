@@ -83,6 +83,7 @@ h3{
   background-image: var(--hero-desktop);
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   position: relative;
 }
 
