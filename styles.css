@@ -33,7 +33,9 @@
   --copper-dark: #4c2516;
   --copper-mid:  #9a5a34;
   --copper-light:#e1b67c;
-  --copper-text: #f5efe7;
+
+  /* Button text */
+  --btn-warmwhite: #F5F1EA;
 }
 
 /* =========================
@@ -43,21 +45,16 @@
 html,body{ margin:0; padding:0; }
 img{ max-width:100%; display:block; }
 
-html{
-  background: #000; /* fallback behind fixed bg */
-}
+html{ background:#000; } /* fallback behind fixed bg */
 
 /* =========================
    GLOBAL BACKGROUND (REAL FIXED LAYER)
-   - Works on iOS Safari (unlike background-attachment: fixed)
+   - Works on iOS Safari
    ========================= */
 body{
   font-family: var(--font-body);
   color: var(--text-main);
   line-height: 1.65;
-
-  /* ✅ IMPORTANT: do NOT set the image on body background.
-     We use ::before for a true fixed layer. */
   background: transparent;
   position: relative;
   min-height: 100vh;
@@ -75,12 +72,11 @@ body::before{
   background-position: center;
   background-repeat: no-repeat;
 
-  /* Helps iOS keep this stable */
   transform: translateZ(0);
   will-change: transform;
 }
 
-/* Mobile background swap (and slightly higher anchor to reduce “face zoom”) */
+/* Mobile background swap */
 @media (max-width: 760px){
   body::before{
     background-image: var(--hero-mobile);
@@ -88,8 +84,7 @@ body::before{
   }
 }
 
-/* Optional very subtle global darkening for legibility WITHOUT “panels”
-   (If you want it even cleaner, set opacity to 0 or delete this.) */
+/* Subtle global darkening (NOT a panel) */
 body::after{
   content:"";
   position: fixed;
@@ -156,7 +151,6 @@ h3{
   justify-content: center;
   text-align: center;
 
-  /* Keep hero readable; this is not a “scroll slab” */
   background:
     radial-gradient(120% 90% at 50% 20%, rgba(0,0,0,.20), transparent 58%),
     linear-gradient(rgba(0,0,0,.50), rgba(0,0,0,.78));
@@ -212,7 +206,6 @@ h3{
   border-radius: 12px;
   text-decoration: none;
 
-  /* If you want these 100% clear too, set background: transparent; box-shadow:none; */
   background: rgba(0,0,0,.18);
   border: 1px solid rgba(225,182,124,.12);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
@@ -238,7 +231,7 @@ h3{
 }
 
 /* =========================
-   BUTTONS (SATURATED + READABLE)
+   BUTTONS (PATINA + READABLE)
    ========================= */
 .btn{
   font-family: var(--font-display);
@@ -256,12 +249,12 @@ h3{
   user-select:none;
   position: relative;
 
-  /* tiny lift for readability vs background detail */
   text-shadow: 0 10px 20px rgba(0,0,0,.55);
 }
 
 .btn-copper{
-  color: #0b0b0b; /* black lettering */
+  /* ✅ Warm white (highest contrast on patina) */
+  color: var(--btn-warmwhite);
 
   background-image: var(--copper-img);
   background-size: cover;
@@ -270,35 +263,30 @@ h3{
 
   border: 1px solid rgba(76,37,22,.92);
 
+  /* ✅ Slightly calmer patina = better readability */
+  filter: saturate(0.78) contrast(0.94);
+
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.12),
     inset 0 -2px 0 rgba(0,0,0,.35),
     0 10px 26px rgba(0,0,0,.65);
 
-  /* ✅ readability: thin light edge + soft dark bloom (no tint panel) */
+  /* ✅ Legible on noisy texture */
   text-shadow:
-    0 1px 0 rgba(255,255,255,.30),
-    0 0 6px rgba(0,0,0,.35);
-}
-/* =========================
-   BUTTON PATINA — READABILITY TUNE
-   ========================= */
-.btn-copper{
-  /* Calm the patina just a touch */
-  filter: saturate(0.82) contrast(0.95);
+    0 1px 0 rgba(0,0,0,.55),
+    0 0 6px rgba(0,0,0,.45);
 }
 
-/* Subtle neutral veil to even hot spots (does NOT tint like glass) */
+/* Subtle neutral veil to even hot spots (NOT a panel) */
 .btn-copper::before{
   content:"";
   position:absolute;
   inset:0;
   border-radius: inherit;
   pointer-events:none;
-
-  /* very light parchment/soot balance */
-  background: rgba(18, 14, 10, 0.12);
+  background: rgba(18,14,10,.10);
 }
+
 .btn-copper:hover{
   transform: translateY(-1px);
   box-shadow:
@@ -309,7 +297,7 @@ h3{
 
 .btn-copper:active{
   transform: translateY(0px);
-  filter: saturate(1.08) contrast(1.02);
+  filter: saturate(0.86) contrast(0.98);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.10),
     inset 0 -1px 0 rgba(0,0,0,.45),
@@ -321,7 +309,6 @@ h3{
   border: 1px solid rgba(225,182,124,.35);
   background: transparent;
   box-shadow: none;
-
   text-shadow: 0 10px 22px rgba(0,0,0,.70);
 }
 
