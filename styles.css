@@ -90,6 +90,7 @@ h3{
 @media (max-width: 760px){
   .hero{
     background-image: var(--hero-mobile);
+    background-attachment: fixed;
   }
 }
 
