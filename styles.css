@@ -214,9 +214,9 @@ h3{
 }
 
 .btn-copper{
-  color: var(--copper-text);
+  /* was: color: var(--copper-text); */
+  color: #0b0b0b;              /* ✅ black lettering */
 
-  /* FULL SATURATION patina fill */
   background-image: var(--copper-img);
   background-size: cover;
   background-position: center;
@@ -229,7 +229,8 @@ h3{
     inset 0 -2px 0 rgba(0,0,0,.35),
     0 10px 26px rgba(0,0,0,.65);
 
-  text-shadow: 0 2px 0 rgba(0,0,0,.35);
+  /* was: text-shadow: 0 2px 0 rgba(0,0,0,.35); */
+ text-shadow: 0 1px 0 rgba(255,255,255,.18);
 }
 
 .btn-copper:hover{
