@@ -54,7 +54,11 @@ html{ background:#000; } /* fallback behind fixed bg */
 body{
   font-family: var(--font-body);
   color: var(--text-main);
-  line-height: 1.65;
+
+  /* ✅ readability upgrade */
+  font-size: 18.5px;      /* was browser default (~16px) */
+  line-height: 1.75;      /* smoother for Garamond */
+
   background: transparent;
   position: relative;
   min-height: 100vh;
@@ -151,9 +155,8 @@ h3{
   justify-content: center;
   text-align: center;
 
-  background:
-    radial-gradient(120% 90% at 50% 20%, rgba(0,0,0,.20), transparent 58%),
-    linear-gradient(rgba(0,0,0,.50), rgba(0,0,0,.78));
+  /* ✅ NO tint — hero is clean */
+  background: transparent;
 }
 
 .hero-brand{
