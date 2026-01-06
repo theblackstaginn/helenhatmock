@@ -206,13 +206,9 @@ h3{
 }
 
 /* =========================
-   SOCIAL ICONS
-   ========================= */
-/* =========================
    SOCIAL ICONS — BRONZE (MATCH BUTTONS)
-   ========================= */
-/* =========================
-   SOCIAL ICONS — REAL BRONZE
+   - Uses the same --bronze-* vars as .btn-copper
+   - No fake copper image, no duplicates, no opacity hacks
    ========================= */
 .hero-social{
   display:flex;
@@ -222,7 +218,6 @@ h3{
   margin-top: 6px;
 }
 
-/* Bronze plate */
 .social-link{
   display:inline-flex;
   align-items:center;
@@ -231,87 +226,84 @@ h3{
   width: 46px;
   height: 46px;
   border-radius: 14px;
-
-  background-image: var(--copper-img);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  border: 1px solid rgba(76,37,22,.95);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.18),
-    inset 0 -2px 0 rgba(0,0,0,.45),
-    0 10px 26px rgba(0,0,0,.55);
-
   text-decoration:none;
+  user-select:none;
   position: relative;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.02),
+      rgba(0,0,0,.02),
+      rgba(255,255,255,.02)
+    ),
+    linear-gradient(
+      180deg,
+      var(--bronze-light) 0%,
+      var(--bronze-mid) 45%,
+      var(--bronze-dark) 100%
+    );
+
+  border: 1px solid #4a2f1b;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    inset 0 -2px 0 rgba(0,0,0,.45),
+    0 10px 26px rgba(0,0,0,.65);
+
+  transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+  filter: saturate(1.05);
 }
 
-/* Even out hot spots without “glass” */
+/* restrained oxidation, same vibe as buttons */
 .social-link::before{
   content:"";
   position:absolute;
   inset:0;
   border-radius: inherit;
-  background: rgba(28,20,14,.18);
   pointer-events:none;
+
+  background:
+    radial-gradient(
+      120% 140% at 50% 100%,
+      rgba(60,120,110,.10),
+      transparent 55%
+    );
 }
 
-/* Icon glyph */
+/* If you use inline SVGs inside the link, this will color them */
+.social-link svg{
+  width: 22px;
+  height: 22px;
+  fill: var(--bronze-text);
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+}
+
+/* If you use <img class="social-ico"> icons, this keeps them readable */
 .social-ico{
-  width: 26px;
-  height: 26px;
-
-  /* warm off-white like logo text */
-  filter: brightness(0) invert(0.94);
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(0.92) drop-shadow(0 10px 20px rgba(0,0,0,.25));
 }
 
-/* Hover */
 .social-link:hover{
   transform: translateY(-1px);
+  filter: saturate(1.1) brightness(1.03);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 1px 0 rgba(255,255,255,.38),
     inset 0 -2px 0 rgba(0,0,0,.48),
-    0 14px 34px rgba(0,0,0,.65);
-}
-
-/* Calm patina slightly for legibility */
-.social-link::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: inherit;
-  background: rgba(18,14,10,.12);
-  pointer-events:none;
-}
-
-/* Icon itself */
-.social-ico{
-  width: 26px;
-  height: 26px;
-
-  /* warm off-white, same logic as buttons */
-  filter: brightness(0) invert(0.92);
-}
-
-/* Hover / press */
-.social-link:hover{
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.18),
-    inset 0 -2px 0 rgba(0,0,0,.38),
-    0 14px 34px rgba(0,0,0,.65);
+    0 14px 34px rgba(0,0,0,.72);
 }
 
 .social-link:active{
   transform: translateY(0);
-  filter: saturate(1.05);
+  filter: brightness(0.97);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.10),
-    inset 0 -1px 0 rgba(0,0,0,.45),
-    0 8px 20px rgba(0,0,0,.55);
+    inset 0 1px 0 rgba(255,255,255,.25),
+    inset 0 -1px 0 rgba(0,0,0,.55),
+    0 6px 16px rgba(0,0,0,.55);
 }
+
 /* =========================
    BUTTONS (REAL BRONZE)
    ========================= */
@@ -319,7 +311,6 @@ h3{
   font-family: var(--font-display);
   font-weight: normal;
   letter-spacing: .12em;
- 
 
   padding: 14px 28px;
   border-radius: 12px;
