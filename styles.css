@@ -1,5 +1,5 @@
 /* =========================================================
-   Helen Hat Company — styles.css (CLEAN / STABLE)
+   Helen Hat Company — styles.css (COHESIVE / STABLE)
    ========================================================= */
 
 /* =========================
@@ -35,6 +35,10 @@
   --bronze-mid:#9a6a3a;
   --bronze-light:#d4b07a;
   --bronze-text:#f6eddc;
+
+  /* Accent lines */
+  --line: rgba(255,255,255,.10);
+  --gold-line: rgba(225,182,124,.22);
 }
 
 /* =========================
@@ -44,6 +48,19 @@
 html,body{ margin:0; padding:0; }
 img{ max-width:100%; display:block; }
 html{ background:#000; }
+
+a{ color:inherit; }
+
+/* Screen-reader-only */
+.sr-only{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
 
 /* =========================
    GLOBAL BACKGROUND
@@ -64,6 +81,7 @@ body::before{
   inset:0;
   z-index:-2;
   background:var(--hero-desktop) center / cover no-repeat;
+  transform: translateZ(0);
 }
 
 @media(max-width:760px){
@@ -79,6 +97,7 @@ body::after{
   inset:0;
   z-index:-1;
   background:rgba(0,0,0,.18);
+  pointer-events:none;
 }
 
 /* =========================
@@ -92,17 +111,9 @@ h1,h2,h3{
   text-shadow:0 10px 26px rgba(0,0,0,.70);
 }
 
-h1{
-  font-size:clamp(2.0rem, 4.5vw, 3.1rem);
-}
-
-h2{
-  font-size:clamp(1.6rem, 3.2vw, 2.2rem);
-}
-
-h3{
-  font-size:1.25rem;
-}
+h1{ font-size:clamp(2.0rem, 4.5vw, 3.1rem); }
+h2{ font-size:clamp(1.6rem, 3.2vw, 2.2rem); text-align:center; }
+h3{ font-size:1.25rem; }
 
 /* =========================
    HERO
@@ -118,8 +129,16 @@ h3{
   text-align:center;
 }
 
+.hero-brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin: 0 0 12px;
+}
+
 .logo{
   width:min(560px,84vw);
+  height:auto;
   filter:drop-shadow(0 18px 34px rgba(0,0,0,.72));
 }
 
@@ -142,13 +161,83 @@ h3{
 }
 
 /* =========================
-   SOCIAL ICONS — BRONZE
+   BUTTONS
+   ========================= */
+.btn{
+  font-family:var(--font-display);
+  letter-spacing:.12em;
+  padding:14px 28px;
+  border-radius:12px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  user-select:none;
+  position:relative;
+  transition:transform .2s ease, filter .2s ease, box-shadow .2s ease, border-color .2s ease;
+  text-shadow: 0 10px 20px rgba(0,0,0,.55);
+}
+
+.btn-copper{
+  color:var(--bronze-text);
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.02),rgba(0,0,0,.02),rgba(255,255,255,.02)),
+    linear-gradient(180deg,var(--bronze-light) 0%,var(--bronze-mid) 45%,var(--bronze-dark) 100%);
+  border:1px solid #4a2f1b;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    inset 0 -2px 0 rgba(0,0,0,.45),
+    0 10px 26px rgba(0,0,0,.65);
+  filter:saturate(1.05);
+}
+
+.btn-copper:hover{
+  transform:translateY(-1px);
+  filter:saturate(1.1) brightness(1.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -2px 0 rgba(0,0,0,.48),
+    0 14px 34px rgba(0,0,0,.72);
+}
+
+.btn-copper:active{
+  transform:translateY(0);
+  filter:brightness(.97);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    inset 0 -1px 0 rgba(0,0,0,.55),
+    0 6px 16px rgba(0,0,0,.55);
+}
+
+.btn-outline{
+  color: var(--text-main);
+  border: 1px solid rgba(225,182,124,.35);
+  background: rgba(0,0,0,.06);
+  box-shadow: none;
+  backdrop-filter: blur(2px);
+}
+
+.btn-outline:hover{
+  border-color: rgba(225,182,124,.55);
+  background: rgba(0,0,0,.10);
+}
+
+/* =========================
+   SOCIAL ICONS — BRONZE PLATES
+   (icons remain patina-filled via SVG pattern)
    ========================= */
 .hero-social{
   display:flex;
+  align-items:center;
   justify-content:center;
   gap:12px;
   margin-top:6px;
+}
+
+.dot{
+  opacity:.65;
+  transform: translateY(-1px);
+  text-shadow:0 10px 18px rgba(0,0,0,.60);
 }
 
 .social-link{
@@ -160,7 +249,8 @@ h3{
   justify-content:center;
   position:relative;
   text-decoration:none;
-  font-size:0; /* hide text nodes */
+  font-size:0; /* hides any accidental text nodes */
+  user-select:none;
 
   background:
     linear-gradient(90deg,rgba(255,255,255,.02),rgba(0,0,0,.02),rgba(255,255,255,.02)),
@@ -185,12 +275,11 @@ h3{
   background:radial-gradient(120% 140% at 50% 100%,rgba(60,120,110,.10),transparent 55%);
 }
 
-.social-link svg{
-  width:28px;
-  height:28px;
-  fill:var(--bronze-text);
-  filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));
-  transform:translateY(-0.5px);
+.social-ico{
+  width:30px;
+  height:30px;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.30));
+  transform: translateY(-0.5px);
 }
 
 .social-link:hover{
@@ -212,53 +301,7 @@ h3{
 }
 
 /* =========================
-   BUTTONS
-   ========================= */
-.btn{
-  font-family:var(--font-display);
-  letter-spacing:.12em;
-  padding:14px 28px;
-  border-radius:12px;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  user-select:none;
-}
-
-.btn-copper{
-  color:var(--bronze-text);
-  background:
-    linear-gradient(90deg,rgba(255,255,255,.02),rgba(0,0,0,.02),rgba(255,255,255,.02)),
-    linear-gradient(180deg,var(--bronze-light) 0%,var(--bronze-mid) 45%,var(--bronze-dark) 100%);
-  border:1px solid #4a2f1b;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.35),
-    inset 0 -2px 0 rgba(0,0,0,.45),
-    0 10px 26px rgba(0,0,0,.65);
-  transition:transform .2s ease,filter .2s ease,box-shadow .2s ease;
-}
-
-.btn-copper:hover{
-  transform:translateY(-1px);
-  filter:saturate(1.1) brightness(1.03);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.38),
-    inset 0 -2px 0 rgba(0,0,0,.48),
-    0 14px 34px rgba(0,0,0,.72);
-}
-
-.btn-copper:active{
-  transform:translateY(0);
-  filter:brightness(.97);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.25),
-    inset 0 -1px 0 rgba(0,0,0,.55),
-    0 6px 16px rgba(0,0,0,.55);
-}
-
-/* =========================
-   STOREFRONT (CENTERED / FIXED)
+   STOREFRONT (CENTERED)
    ========================= */
 .storefront{
   padding:28px 0 56px;
@@ -267,9 +310,9 @@ h3{
 .storefront-wrap{
   width:min(1100px,calc(100% - 36px));
   margin:0 auto;
+  text-align:center;
 }
 
-/* Constrain + center so it doesn’t “drift” */
 .storefront img{
   display:block;
   width:100%;
@@ -280,9 +323,15 @@ h3{
   box-shadow:var(--shadow);
   border:1px solid rgba(225,182,124,.12);
 
-  /* prevents it from taking over the page */
   max-height:520px;
   object-fit:cover;
+}
+
+.storefront-caption{
+  margin: 14px auto 0;
+  max-width: 760px;
+  color: var(--text-muted);
+  text-shadow:0 10px 26px rgba(0,0,0,.70);
 }
 
 /* =========================
@@ -295,14 +344,6 @@ h3{
   padding:70px 0;
 }
 
-.section h2,
-.section-dark h2{
-  text-align:center;
-  margin:0 0 12px;
-}
-
-.section p,
-.section-dark p,
 .section-note{
   max-width:820px;
   margin:0 auto 28px;
@@ -311,8 +352,17 @@ h3{
   text-shadow:0 10px 26px rgba(0,0,0,.70);
 }
 
+/* About text (explicit class used in HTML) */
+.about-text{
+  max-width:820px;
+  margin:0 auto;
+  text-align:center;
+  color:var(--text-muted);
+  text-shadow:0 10px 26px rgba(0,0,0,.70);
+}
+
 /* =========================
-   GALLERY (NORMALIZED)
+   GALLERY
    ========================= */
 .gallery-grid{
   display:grid;
@@ -329,7 +379,93 @@ h3{
   border:1px solid rgba(225,182,124,.10);
 }
 
+/* =========================
+   VISIT CARD
+   ========================= */
+.visit{ padding-top: 40px; }
+
+.visit-card{
+  width:min(560px, calc(100% - 12px));
+  margin: 0 auto;
+  padding: 30px 26px;
+
+  border-radius: 18px;
+  border: 1px solid rgba(225,182,124,.16);
+  box-shadow: var(--shadow);
+
+  background: rgba(0,0,0,.10);
+  backdrop-filter: blur(4px);
+  text-align:left;
+}
+
+.visit-row{
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+
+.visit-row:last-of-type{
+  border-bottom:none;
+  padding-bottom:6px;
+}
+
+.visit-row p{
+  margin:0;
+  color:var(--text-muted);
+  text-shadow:0 10px 22px rgba(0,0,0,.70);
+}
+
+.visit-row a{
+  color:var(--text-main);
+  text-decoration:none;
+  border-bottom:1px solid rgba(225,182,124,.22);
+}
+
+.visit-row a:hover{
+  border-bottom-color: rgba(225,182,124,.45);
+}
+
+.mini-link{
+  display:inline-block;
+  margin-top:8px;
+  font-size:1rem;
+}
+
+.fineprint{
+  margin-top:10px !important;
+  font-size:.95rem;
+  opacity:.85;
+}
+
+.visit-actions{
+  padding-top:18px;
+  display:flex;
+  justify-content:flex-start;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+.footer{
+  width:min(1100px,calc(100% - 36px));
+  margin: 0 auto;
+  padding: 44px 0 60px;
+  text-align:center;
+  color: var(--text-muted);
+  text-shadow:0 10px 26px rgba(0,0,0,.75);
+}
+
+.footer-note{
+  font-size:.9rem;
+  opacity:.65;
+  margin-top:8px;
+}
+
+/* =========================
+   MOBILE TUNING
+   ========================= */
 @media(max-width:760px){
   .gallery-grid img{ height:220px; }
   .storefront img{ max-height:440px; }
+  .hero-overlay{ padding: 18px 16px 44px; }
+  .btn{ padding: 13px 22px; }
 }
